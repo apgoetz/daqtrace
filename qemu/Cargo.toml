@@ -1,0 +1,36 @@
+[package]
+authors = ["Andy Goetz <andy@andygoetz.org>"]
+edition = "2018"
+readme = "README.md"
+name = "daqtrace-qemu"
+version = "0.1.0"
+license = "Apache-2.0"
+description = "example test using qemu with daqtrace"
+
+[dependencies]
+pl011_qemu = "0.2.0"
+panic-halt = "0.2.0"
+cortex-m-semihosting = "0.3.3"
+cortex-m-rt= "0.6.10"
+serde_cbor =  { version = "0.11.1", default-features = false }
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+embedded-hal = "0.2.4"
+nb = "1.0.0"
+daqtrace = {path = ".."}
+
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true # <-
+incremental = false
+opt-level = 3 # <-
+overflow-checks = true # <-
+
+[profile.release]
+codegen-units = 1
+debug = 2
+debug-assertions = false # <-
+incremental = false
+lto = 'fat'
+opt-level = 3 # <-
+overflow-checks = false # <-
