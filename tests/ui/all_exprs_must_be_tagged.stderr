@@ -1,0 +1,5 @@
+error: trace! macro requires that all logged expressions be tagged with a label for example, trace!(_,_, my_label_x : 1 + 1); or be a simple expression, for example, trace!(_,_,myvarname)
+ --> $DIR/all_exprs_must_be_tagged.rs:8:23
+  |
+8 |     trace!(sink,hello,123);
+  |                       ^^^

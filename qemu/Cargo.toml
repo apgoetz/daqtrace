@@ -16,7 +16,7 @@ serde_cbor =  { version = "0.11.1", default-features = false }
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 embedded-hal = "0.2.4"
 nb = "1.0.0"
-daqtrace = {path = ".."}
+daqtrace = {path = "..", default-features = false}
 
 [profile.dev]
 codegen-units = 1

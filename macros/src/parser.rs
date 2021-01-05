@@ -4,15 +4,15 @@ use syn::{self, Token, punctuated::Punctuated, Error};
 use syn::parse::{Parse, ParseStream, Result};
 
 
-// fields are sink id labels expressions
+// fields are sink key labels expressions
 pub struct TraceStatement (pub syn::Expr, pub syn::Ident, pub Vec<String>, pub Vec<syn::Expr>);
 
 impl Parse for TraceStatement {
     fn parse (input: ParseStream) -> Result<Self> {
         let args: Punctuated<TraceArg, Token![,]> = input.parse_terminated(TraceArg::parse)?;
 
-        if args.len() < 3 {
-            return Err(Error::new(input.span(), "trace! macro requires at least 3 parameters"));
+        if args.len() < 2 {
+            return Err(Error::new(input.span(), "trace! macro requires at least 2 parameters"));
         }
 
         let mut iter = args.into_iter();
@@ -20,10 +20,10 @@ impl Parse for TraceStatement {
         // first parameter is a rust expression representing the sink
         let sink = iter.next().unwrap().expr;
 
-        let id_arg = iter.next().unwrap();
-        let id = match id_arg.get_ident() {
+        let key_arg = iter.next().unwrap();
+        let key = match key_arg.get_ident() {
             Some(i) => i.clone(),
-            None => return Err(Error::new_spanned(id_arg.expr, "trace! macro requires that the trace id be a valid rust identifier"))
+            None => return Err(Error::new_spanned(key_arg.expr, "trace! macro requires that the trace key be a valid rust identifier"))
         };
 
         
@@ -37,7 +37,7 @@ impl Parse for TraceStatement {
         // convert get rid of options since we have checked them all
         let labels = labels.into_iter().flatten().collect();
 
-        Ok(TraceStatement (sink, id, labels, exprs))
+        Ok(TraceStatement (sink, key, labels, exprs))
 
     }
 }
@@ -120,8 +120,8 @@ fn test_get_ident() -> Result<()> {
 #[test]
 fn ident() -> Result<()> {
 //    let idents = ["a", "b", "c"];
-    let TraceStatement(_,id,labels,_) = syn::parse_str("a,b,c")?;
-    assert_eq!(id.to_string(), "b");
+    let TraceStatement(_,key,labels,_) = syn::parse_str("a,b,c")?;
+    assert_eq!(key.to_string(), "b");
 
     assert_eq!(labels.len(), 1);
     assert_eq!(labels[0], "c");

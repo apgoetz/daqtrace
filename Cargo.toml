@@ -10,16 +10,17 @@ homepage = "https://github.com/apgoetz/daqtrace"
 description = "no-std friendly tracing library for data aquisition"
 
 [features]
-default = []
-std = ["serde/std", "serde_json/std"]
+default = ["std"]
+std = ["serde/std"]
 
 [dependencies]
 serde = { version = "1.0", default-features = false}
 daqtrace-macros = {path = "macros"}
 
 [dev-dependencies]
-serde_json = { version = "1.0", default-features = false}
+trybuild = "1.0"
+serde_json = { version = "1.0"}
+
 
 [[example]]
 name = "json"
-required-features = ["std"]

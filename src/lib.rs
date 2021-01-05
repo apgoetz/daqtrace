@@ -9,7 +9,5 @@ pub trait Sink {
     fn timestamp(&self) -> u16 {
         return 0
     }
-    fn write<S:Serialize>(&self, _id : u16, message : &S);
+    fn write<S:Serialize>(&self, id : u16, message : &S);
 }
-
-

@@ -1,0 +1,7 @@
+error[E0277]: the trait bound `{integer}: daqtrace::Sink` is not satisfied
+ --> $DIR/sink_must_be_sink.rs:6:12
+  |
+6 |     trace!(sink, hello, a, b, c);
+  |            ^^^^ the trait `daqtrace::Sink` is not implemented for `{integer}`
+  |
+  = note: required by `timestamp`

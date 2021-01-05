@@ -1,0 +1,5 @@
+error: trace! macro requires that the trace key be a valid rust identifier
+ --> $DIR/trace_key_is_valid_identifier.rs:8:17
+  |
+8 |     trace!(sink,123);
+  |                 ^^^

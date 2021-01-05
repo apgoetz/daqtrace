@@ -1,0 +1,7 @@
+error: trace! macro requires at least 2 parameters
+ --> $DIR/enough_args.rs:8:5
+  |
+8 |     trace!(sink);
+  |     ^^^^^^^^^^^^^
+  |
+  = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
