@@ -21,6 +21,12 @@ daqtrace-macros = {path = "macros"}
 trybuild = "1.0"
 serde_json = { version = "1.0"}
 
+[workspace]
+members = [
+".",
+"macros",
+]
+
 
 [[example]]
 name = "json"

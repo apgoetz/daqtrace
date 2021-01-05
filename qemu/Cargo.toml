@@ -7,6 +7,11 @@ version = "0.1.0"
 license = "Apache-2.0"
 description = "example test using qemu with daqtrace"
 
+# we exclude qemu since it needs to cross compile as it is a
+# cross-compiled no-std crate, which doesnt play nicely with this
+# workspace
+[workspace]
+
 [dependencies]
 pl011_qemu = "0.2.0"
 panic-halt = "0.2.0"
