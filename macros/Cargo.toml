@@ -1,0 +1,18 @@
+[package]
+authors = ["Andy Goetz <andy@andygoetz.org>"]
+edition = "2018"
+readme = "README.md"
+name = "daqtrace-macros"
+version = "0.1.0"
+license = "Apache-2.0"
+repository = "https://github.com/apgoetz/daqtrace"
+homepage = "https://github.com/apgoetz/daqtrace"
+description = "macros for daqtrace, not expected to be directly used"
+
+[lib]
+proc-macro=true
+
+[dependencies]
+syn = { version = "1.0", features = ["full"] }
+quote = "1.0"
+proc-macro2 = "1.0"
